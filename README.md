@@ -1,0 +1,2 @@
+# elasticsearch-analysis-jieba
+基于jieba的elasticsearch中文分词插件

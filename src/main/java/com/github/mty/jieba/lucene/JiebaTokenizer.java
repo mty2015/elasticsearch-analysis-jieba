@@ -44,17 +44,17 @@ public class JiebaTokenizer extends org.apache.lucene.analysis.Tokenizer {
         }
         Token token = tokenBuffer.get(tokenIndex);
         termAtt.append(token.value);
-        offsetAtt.setOffset(token.startPos, token.endPos);
+        offsetAtt.setOffset(correctOffset(token.startPos), correctOffset(token.endPos));
         posIncrAtt.setPositionIncrement(1);
         tokenIndex += 1;
-        finalOffset = token.endPos;
+        finalOffset = correctOffset(token.endPos);
         return true;
     }
 
     @Override
     public void end() throws IOException {
         super.end();
-        offsetAtt.setOffset(finalOffset+1, finalOffset+1);
+        offsetAtt.setOffset(finalOffset, finalOffset);
     }
 
     @Override
@@ -72,7 +72,9 @@ public class JiebaTokenizer extends org.apache.lucene.analysis.Tokenizer {
     @Override
     public void close() throws IOException {
         super.close();
-        bufferReader.close();
-        bufferReader = null;
+        if (bufferReader != null){
+            bufferReader.close();
+            bufferReader = null;
+        }
     }
 }

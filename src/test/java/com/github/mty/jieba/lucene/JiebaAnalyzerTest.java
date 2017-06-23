@@ -17,6 +17,10 @@ public class JiebaAnalyzerTest extends BaseTokenStreamTestCase {
         checkRandomData(new Random(0), analyzer, 1);
 
         System.out.println(BaseTokenStreamTestCase.toString(analyzer, "工信处女干事每月经过下属科室都要亲口交代24口交换机等技术性器件的安装工作"));
+        System.out.println("==============");
+        System.out.println(BaseTokenStreamTestCase.toString(analyzer, "hello  world,this is my first program"));
+        System.out.println("==============");
+        System.out.println(BaseTokenStreamTestCase.toString(analyzer, "hello,world,this,is,my,first,program"));
 
     }
 

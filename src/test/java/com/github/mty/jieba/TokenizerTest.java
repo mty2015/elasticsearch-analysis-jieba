@@ -79,9 +79,11 @@ public class TokenizerTest extends TestCase {
 
     public void testToknizer() {
         Tokenizer t = new Tokenizer();
-        printTokens(t.tokenize("这是一个伸手不见五指的黑夜。我叫孙悟空，我爱北京，我爱Python和C++。", false, true));
+        printTokens(t.tokenize("这是一个伸手不见五指的黑夜。我叫孙悟空，我爱北京，我爱Python和C++。", true, true));
         System.out.println("====================");
-        printTokens(t.tokenize("hello world, this is my first program", false, true));
+        printTokens(t.tokenize("hello world this is my first program", false, true));
+        System.out.println("====================");
+        printTokens(t.tokenize("hello,,world,this,is,my,first,program", false, true));
     }
 
 }

@@ -4,12 +4,18 @@ import com.github.mty.utils.MtyStringUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 /**
  * Created by lihongfu on 17/5/31.
@@ -17,7 +23,7 @@ import java.util.regex.Pattern;
 public class Tokenizer {
 
 
-    private Map<String, Integer> freq = new HashMap<String, Integer>();
+    private Map<String, Integer> freq = new HashMap(349050);
     private FinalSeg finalSeg;
     private long total;
     private boolean initialized;
@@ -29,6 +35,8 @@ public class Tokenizer {
     private static final Pattern RE_HAN_CUT_ALL = Pattern.compile("([\\u4E00-\\u9FD5]+)");
     private static final Pattern RE_SKIP_HAN_CUT_ALL = Pattern.compile("[^a-zA-Z0-9+#\\n]");
     private static final Pattern RE_ENG = Pattern.compile("[a-zA-Z0-9]");
+
+    private static final Pattern RE_USERDICT = Pattern.compile("^(.+?)( [0-9]+)?( [a-z]+)?$");
 
 
     public Tokenizer() {
@@ -363,6 +371,50 @@ public class Tokenizer {
 
             return frags;
         }
+    }
+
+    private void loadUserDict(Stream<String> stream) throws IOException {
+        try {
+            stream.forEach(line -> {
+                Matcher matcher = RE_USERDICT.matcher(line.trim());
+                if (matcher.find()) {
+                    String word = matcher.group(1).trim();
+                    String freqStr = matcher.group(2);
+                    int freq = 1;
+                    if (freqStr != null) {
+                        freq = Integer.parseInt(freqStr.trim());
+                    } else {
+                        double df = 1.;
+                        for (String seg : this.cut(word, false, false)) {
+                            df *= this.freq.getOrDefault(seg, 1) / total;
+                        }
+                        freq = Math.max((int) (df * total) + 1, this.freq.getOrDefault(word, 1));
+                    }
+
+                    this.freq.put(word, freq);
+                    this.total += freq;
+
+                    for (int i = 1; i <= word.length(); i++) {
+                        String wfrag = word.substring(0, i);
+                        if (!this.freq.containsKey(wfrag)) {
+                            this.freq.put(wfrag, 0);
+                        }
+                    }
+                }
+            });
+        } finally {
+            stream.close();
+        }
+    }
+
+
+    public void loadUserDict(InputStream in) throws IOException {
+        this.loadUserDict(new BufferedReader(new InputStreamReader(in, Charset.forName("UTF-8"))).lines());
+
+    }
+
+    private void loadUserDict(Path path) throws IOException {
+        this.loadUserDict(Files.lines(path, Charset.forName("UTF-8")));
     }
 
     public Map<String, Integer> getFreq() {

@@ -70,9 +70,9 @@ public class FinalSeg {
 
 
     protected void loadEmitP(String emitPFileName) throws IOException {
-        emitP = new HashMap<Character, Map<Character, Double>>();
+        emitP = new HashMap();
         for (Character s : STATES) {
-            emitP.put(s, new HashMap<Character, Double>());
+            emitP.put(s, new HashMap(10000));
         }
 
         Pattern wordPattern = Pattern.compile("'\\\\u(.*?)': (.*?),");

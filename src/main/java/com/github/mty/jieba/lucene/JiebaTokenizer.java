@@ -8,6 +8,7 @@ import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -54,7 +55,7 @@ public class JiebaTokenizer extends org.apache.lucene.analysis.Tokenizer {
     @Override
     public void end() throws IOException {
         super.end();
-        offsetAtt.setOffset(finalOffset, finalOffset);
+        offsetAtt.setOffset(finalOffset + 1, finalOffset + 1);
     }
 
     @Override
@@ -76,5 +77,12 @@ public class JiebaTokenizer extends org.apache.lucene.analysis.Tokenizer {
             bufferReader.close();
             bufferReader = null;
         }
+    }
+
+    public void loadUserDict(InputStream in) throws IOException {
+        if (this.scanner == null){
+            throw new IllegalStateException("not initialized tokenizer correct");
+        }
+        this.scanner.loadUserDict(in);
     }
 }

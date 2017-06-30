@@ -20,7 +20,7 @@ public class JiebaAnalyzerTest extends BaseTokenStreamTestCase {
         System.out.println("==============");
         System.out.println(BaseTokenStreamTestCase.toString(analyzer, "hello  world,this is my first program"));
         System.out.println("==============");
-        System.out.println(BaseTokenStreamTestCase.toString(analyzer, "hello,world,this,is,my,first,program"));
+        System.out.println(BaseTokenStreamTestCase.toString(analyzer, "这是一个伸手不见五指的黑夜。我叫孙悟空，我爱北京，我爱Python和C++。"));
 
     }
 

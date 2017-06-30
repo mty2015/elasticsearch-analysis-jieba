@@ -2,6 +2,7 @@ package com.github.mty.jieba;
 
 import junit.framework.TestCase;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -84,6 +85,15 @@ public class TokenizerTest extends TestCase {
         printTokens(t.tokenize("hello world this is my first program", false, true));
         System.out.println("====================");
         printTokens(t.tokenize("hello,,world,this,is,my,first,program", false, true));
+    }
+
+
+    public void testLoadUserDict() throws IOException {
+        Tokenizer t = new Tokenizer();
+        printResult(t.cut("这个洒金皮的和田玉我很喜欢呢", false, false));
+        System.out.println("====================");
+        t.loadUserDict(this.getClass().getResourceAsStream("/userdict.txt"));
+        printResult(t.cut("这个洒金皮的和田玉我很喜欢呢", false, false));
     }
 
 }

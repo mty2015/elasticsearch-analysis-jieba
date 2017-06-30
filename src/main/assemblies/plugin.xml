@@ -6,13 +6,14 @@
     </formats>
     <includeBaseDirectory>false</includeBaseDirectory>
 
-    <files>
-        <file>
-            <source>${project.basedir}/src/main/resources/plugin-descriptor.properties</source>
-            <outputDirectory></outputDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>${project.basedir}/config</directory>
+            <outputDirectory>/</outputDirectory>
             <filtered>true</filtered>
-        </file>
-    </files>
+        </fileSet>
+    </fileSets>
+
     <dependencySets>
         <dependencySet>
             <outputDirectory>/</outputDirectory>

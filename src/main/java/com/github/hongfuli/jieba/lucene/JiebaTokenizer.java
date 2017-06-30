@@ -1,7 +1,7 @@
-package com.github.mty.jieba.lucene;
+package com.github.hongfuli.jieba.lucene;
 
-import com.github.mty.jieba.Token;
-import com.github.mty.jieba.Tokenizer;
+import com.github.hongfuli.jieba.Token;
+import com.github.hongfuli.jieba.Tokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
@@ -15,7 +15,7 @@ import java.util.List;
  * Created by lihongfu on 17/6/19.
  */
 public class JiebaTokenizer extends org.apache.lucene.analysis.Tokenizer {
-    private com.github.mty.jieba.Tokenizer scanner;
+    private com.github.hongfuli.jieba.Tokenizer scanner;
     private BufferedReader bufferReader;
     private int tokenIndex;
     private List<Token> tokenBuffer;

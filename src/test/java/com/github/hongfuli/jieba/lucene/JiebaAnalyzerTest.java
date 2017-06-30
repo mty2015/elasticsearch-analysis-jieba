@@ -1,4 +1,4 @@
-package com.github.mty.jieba.lucene;
+package com.github.hongfuli.jieba.lucene;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.BaseTokenStreamTestCase;

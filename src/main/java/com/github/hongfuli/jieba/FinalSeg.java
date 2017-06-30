@@ -1,6 +1,6 @@
-package com.github.mty.jieba;
+package com.github.hongfuli.jieba;
 
-import com.github.mty.utils.MtyStringUtils;
+import com.github.hongfuli.utils.MtyStringUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

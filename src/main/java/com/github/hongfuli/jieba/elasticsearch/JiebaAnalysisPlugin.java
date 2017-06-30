@@ -1,4 +1,4 @@
-package com.github.mty.jieba.elasticsearch;
+package com.github.hongfuli.jieba.elasticsearch;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.elasticsearch.index.analysis.AnalyzerProvider;

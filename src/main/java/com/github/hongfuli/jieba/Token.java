@@ -1,4 +1,4 @@
-package com.github.mty.jieba;
+package com.github.hongfuli.jieba;
 
 /**
  * Created by lihongfu on 17/6/13.

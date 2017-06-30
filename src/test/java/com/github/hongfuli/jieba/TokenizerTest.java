@@ -1,4 +1,4 @@
-package com.github.mty.jieba;
+package com.github.hongfuli.jieba;
 
 import junit.framework.TestCase;
 

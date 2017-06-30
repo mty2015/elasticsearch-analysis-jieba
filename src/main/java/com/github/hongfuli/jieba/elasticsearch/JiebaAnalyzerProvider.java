@@ -1,6 +1,6 @@
-package com.github.mty.jieba.elasticsearch;
+package com.github.hongfuli.jieba.elasticsearch;
 
-import com.github.mty.jieba.lucene.JiebaAnalyzer;
+import com.github.hongfuli.jieba.lucene.JiebaAnalyzer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.elasticsearch.common.io.PathUtils;

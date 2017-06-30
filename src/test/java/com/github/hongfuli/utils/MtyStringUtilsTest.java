@@ -1,4 +1,4 @@
-package com.github.mty.utils;
+package com.github.hongfuli.utils;
 
 import junit.framework.TestCase;
 

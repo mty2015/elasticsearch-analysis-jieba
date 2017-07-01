@@ -10,6 +10,23 @@ mvn package
 ```
 把release/elasticsearch-analysis-jieba-{version}.zip文件解压到 elasticsearch 的 plugins 目录下，重启elasticsearch即可。
 
+创建字段：
+```bash
+
+curl -XPOST http://localhost:9200/index/type/_mapping -d'
+{
+        "properties": {
+            "content": {
+                "type": "text",
+                "analyzer": "jieba",
+                "search_analyzer": "jieba"
+            }
+        }
+    }
+}'
+```
+
+
 直接使用Tokenizer分词
 =======
 可直接使用 `com.github.hongfuli.jieba.Tokenizer` 对文本字符进行分词，方法参数完全和 [jieba python](https://github.com/fxsjy/jieba) 一致。
